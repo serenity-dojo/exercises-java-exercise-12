@@ -1,12 +1,12 @@
 package com.serenitydojo;
 
 import com.serenitydojo.exceptions.FileLoader;
-import com.serenitydojo.exceptions.MissingWelcomeFileException;
 import org.junit.Test;
 
 import java.io.IOException;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class WhenWorkingWithExceptions {
 
@@ -18,7 +18,7 @@ public class WhenWorkingWithExceptions {
 
     /**
      * Exercise 1 - Handling exceptions
-     * Uncomment the code in this test and make it work.
+     * Uncomment the code in this test and {@link FileLoader} and make it work.
      * You will need to modify the FileLoader class so that it correctly handles an IOException
      */
     @Test
@@ -49,9 +49,12 @@ public class WhenWorkingWithExceptions {
      * Create a custom runtime exception called MissingWelcomeFileException,
      * and update the fileHasText() method to throw this exception if no matching file is found.
      */
-    @Test(expected = MissingWelcomeFileException.class)
+    @Test
     public void catchingCustomExceptionsWhenTheFileDoesNotExist() {
         FileLoader fileLoader = new FileLoader();
-        assertThat(fileLoader.fileHasText("does-not-exist.txt","Hello World")).isFalse();
+        // assertThatThrownBy(() -> {
+            assertThat(fileLoader.fileHasText("does-not-exist.txt","Hello World")).isFalse();
+        // }).isInstanceOf(MissingWelcomeFileException.class);
+
     }
 }
